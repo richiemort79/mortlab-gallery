@@ -209,7 +209,7 @@ def build():
 
 
 # Header styling mirrors the Astra theme on wp.lancs.ac.uk/mortlab/gallery/:
-# 80px bar, 1px #d1d5db bottom border, 26px/600 site title, 16px menu items
+# 80px bar (rgba(0,0,0,.94) on white = #0f0f0f), 1px #ffffff bottom border, 26px/600 site title, 16px menu items
 # with 0 1em padding, 1200px content width, hamburger menu below 922px.
 TEMPLATE = """<!doctype html>
 <html lang="en">
@@ -228,22 +228,22 @@ TEMPLATE = """<!doctype html>
     font-size: 1rem; line-height: 1.65;
     min-height: 100vh; display: flex; flex-direction: column;
   }}
-  a {{ color: #4dd0e1; text-decoration: none; }}
-  a:hover {{ color: #4dd0e1; }}
-  :focus-visible {{ outline: 2px solid #4dd0e1; outline-offset: 2px; }}
+  a {{ color: #046bd2; text-decoration: none; }}
+  a:hover {{ color: #045cb4; }}
+  :focus-visible {{ outline: 2px solid #046bd2; outline-offset: 2px; }}
   .wrap {{ max-width: 1240px; margin: 0 auto; padding: 0 20px; width: 100%; }}
 
   /* Header */
-  .site-header {{ background: #0d0d0d; border-bottom: 1px solid #d1d5db; position: relative; }}
+  .site-header {{ background: #0f0f0f; border-bottom: 1px solid #ffffff; position: relative; }}
   .site-header .wrap {{ display: flex; align-items: center; justify-content: space-between; min-height: 80px; }}
   .site-title {{ font-size: 1.625rem; font-weight: 600; line-height: 1.23; padding: 1em 0; margin: 0; }}
-  .site-title a, .site-title a:hover {{ color: #f0f0f0; }}
+  .site-title a, .site-title a:hover {{ color: #ffffff; }}
   .main-nav ul {{ list-style: none; margin: 0; padding: 0; display: flex; }}
-  .main-nav a {{ display: block; padding: 0 1em; line-height: 80px; color: #f0f0f0; transition: color .2s linear; }}
-  .main-nav a:hover {{ color: #4dd0e1; }}
-  .main-nav a.active {{ color: #f0f0f0; }}  /* WordPress custom CSS keeps the current item white */
-  .main-nav a.active:hover {{ color: #4dd0e1; }}
-  .menu-toggle {{ display: none; background: none; border: 0; padding: 8px; margin-right: -8px; color: #f0f0f0; cursor: pointer; }}
+  .main-nav a {{ display: block; padding: 0 1em; line-height: 80px; color: #ffffff; transition: color .2s linear; }}
+  .main-nav a:hover {{ color: #045cb4; }}
+  .main-nav a.active {{ color: #ffffff; }}  /* WordPress menu settings keep the current item white */
+  .main-nav a.active:hover {{ color: #045cb4; }}
+  .menu-toggle {{ display: none; background: none; border: 0; padding: 8px; margin-right: -8px; color: #046bd2; cursor: pointer; }}
   .menu-toggle svg {{ width: 20px; height: 20px; fill: currentColor; display: block; }}
   .menu-toggle .icon-close {{ display: none; }}
   .menu-toggle[aria-expanded="true"] .icon-open {{ display: none; }}
@@ -255,9 +255,9 @@ TEMPLATE = """<!doctype html>
                  background: #ffffff; }}
     .main-nav.open {{ display: block; }}
     .main-nav ul {{ flex-direction: column; padding: 0; }}
-    /* As on WordPress: white dropdown, cyan links, pale-blue hover/current row */
-    .main-nav a, .main-nav a.active {{ line-height: 3; padding: 0 20px; color: #4dd0e1; }}
-    .main-nav a:hover, .main-nav a.active {{ background: #f0f5fa; color: #4dd0e1; }}
+    /* As on WordPress: white dropdown, slate links, blue text on pale-blue hover/current row */
+    .main-nav a, .main-nav a.active {{ line-height: 3; padding: 0 20px; color: #334155; }}
+    .main-nav a:hover, .main-nav a.active {{ background: #f0f5fa; color: #045cb4; }}
   }}
 
   /* Content */
@@ -298,7 +298,7 @@ TEMPLATE = """<!doctype html>
     position: absolute; top: 8px; right: 12px; background: none; border: 0; color: #f0f0f0;
     font-size: 2.2em; line-height: 1; cursor: pointer; padding: 0.1em 0.3em;
   }}
-  .lb-close:hover {{ color: #4dd0e1; }}
+  .lb-close:hover {{ color: #045cb4; }}
   body.no-scroll {{ overflow: hidden; }}
 </style>
 </head>
