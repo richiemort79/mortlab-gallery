@@ -1,0 +1,50 @@
+[
+  {
+    "file": "images/arl13b-head.png",
+    "caption": "Live image of developing prosencephalon of an E8.5 mouse embryo labelled with Arl13bCerulean-Fucci2a. (Mill/Ford)."
+  },
+  {
+    "file": "images/ckitl-timertag.png",
+    "caption": "Live image of cKit-sfGFP/mCherry ‘timer tag’ labelled NIH 3T3 cells. (Olivia Harrison)"
+  },
+  {
+    "file": "images/fucci-tail-skin.gif",
+    "caption": "Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)"
+  },
+  {
+    "file": "images/h2bfucci.png",
+    "caption": "Live imaging of H2BCerulean-Fucci2a labelled NIH 3T3 nuclei. (Stephanie Wright)"
+  },
+  {
+    "file": "images/hair-follicle-depth.jpg",
+    "caption": "Depth coded stack of mouse melanoblasts as they begin to colonise a developing hair follicle at E14.5 (Richard Mort)"
+  },
+  {
+    "file": "images/macrophages.png",
+    "caption": "Melanocytes and macrophages in mouse tail skin (Emma Wilkinson)"
+  },
+  {
+    "file": "images/macrophages-2.png",
+    "caption": ""
+  },
+  {
+    "file": "images/melanin-fucci.gif",
+    "caption": "MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)"
+  },
+  {
+    "file": "images/melanoblasts.gif",
+    "caption": "EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)"
+  },
+  {
+    "file": "images/mtmg-tail.gif",
+    "caption": "Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)"
+  },
+  {
+    "file": "images/pmel.png",
+    "caption": "Live image of EYFP/H2BCerulean labelled melanoblasts migrating on the dorsal lateral pathway. (Richard Mort)"
+  },
+  {
+    "file": "images/qucci.gif",
+    "caption": "Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)"
+  }
+]

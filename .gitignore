@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+*conflicted copy*
+*Conflicted copy*
+__pycache__/
+*.pyc
+# source originals (kept locally, not published)
+New_Gallery_512/
