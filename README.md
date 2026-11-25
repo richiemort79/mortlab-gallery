@@ -10,6 +10,6 @@ https://richiemort79.github.io/mortlab-gallery/
 3. Run `python build.py` (Python 3, standard library only) to regenerate `index.html`.
 4. Commit and push.
 
-Animated GIFs play in the grid as small MP4 copies in `video/` (made automatically by `build.py` when ffmpeg is installed); the lightbox shows the original GIF.
+Animated GIFs play in the grid as small MP4 copies in `video/` (made automatically by `build.py` when ffmpeg is installed); the lightbox plays the same video larger, with a link to the original GIF. Set `SPEED` in `build.py` to change playback speed (0.5 = half the GIF speed).
 
 Tile order is randomised on each load; set `const SHUFFLE = false;` in the template in `build.py` to keep the `captions.json` order.

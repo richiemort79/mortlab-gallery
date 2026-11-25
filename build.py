@@ -6,7 +6,8 @@ Usage: add an image to images/, add an entry to captions.json, run
 
 Animated GIFs are large, so for each images/NAME.gif the grid tile plays a
 small looping MP4 (video/NAME.mp4, with a first-frame poster video/NAME.jpg)
-and the lightbox shows the original GIF. If those files are missing and
+and the lightbox plays the same video larger, with a link to the original GIF.
+Videos play at SPEED x the GIF's own frame rate (changing SPEED re-encodes them). If those files are missing and
 ffmpeg is installed, build.py creates them; without ffmpeg the tile just
 uses the GIF.
 """
@@ -24,6 +25,7 @@ FAVICON = "https://wp.lancs.ac.uk/mortlab/files/2019/11/cropped-logo-2-270x270.p
 DEFAULT_ALT = "Fluorescence microscopy image from the Mort Lab"
 VIDEO_DIR = "video"
 CRF = "20"  # H.264 quality for tile videos (lower = better/larger)
+SPEED = 0.5  # playback speed of videos relative to the GIF (0.5 = half speed)
 
 MENU = [
     ("Home", "http://wp.lancs.ac.uk/mortlab"),
@@ -128,8 +130,11 @@ def tile_video(rel):
     jpg = f"{VIDEO_DIR}/{stem}.jpg"
     src = os.path.join(HERE, rel)
     mp4_abs, jpg_abs = os.path.join(HERE, mp4), os.path.join(HERE, jpg)
+    settings = json.dumps({"crf": CRF, "speed": SPEED})
+    stamp = os.path.join(HERE, VIDEO_DIR, stem + ".settings")
     fresh = lambda p: os.path.isfile(p) and os.path.getmtime(p) >= os.path.getmtime(src)
-    if fresh(mp4_abs) and fresh(jpg_abs):
+    same = os.path.isfile(stamp) and open(stamp).read() == settings
+    if same and fresh(mp4_abs) and fresh(jpg_abs):
         return mp4, jpg
     ffmpeg = shutil.which("ffmpeg")
     if not ffmpeg:
@@ -140,10 +145,12 @@ def tile_video(rel):
     even = "scale=trunc(iw/2)*2:trunc(ih/2)*2"
     subprocess.run([ffmpeg, "-loglevel", "error", "-y", "-i", src, "-an",
                     "-c:v", "libx264", "-preset", "slow", "-crf", CRF,
-                    "-pix_fmt", "yuv420p", "-movflags", "+faststart",
-                    "-vf", even, mp4_abs], check=True)
+                    "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-fps_mode", "vfr",
+                    "-vf", f"setpts=PTS/{SPEED},{even}", mp4_abs], check=True)
     subprocess.run([ffmpeg, "-loglevel", "error", "-y", "-i", src,
                     "-frames:v", "1", "-q:v", "3", "-vf", even, jpg_abs], check=True)
+    with open(stamp, "w") as f:
+        f.write(settings)
     return mp4, jpg
 
 
@@ -171,14 +178,16 @@ def build():
         vid = tile_video(rel) if rel.lower().endswith(".gif") and is_animated_gif(path) else None
         if vid:
             mp4, jpg = vid
+            extra = f' data-video="{esc(mp4)}"'
             media = (f'<video data-src="{esc(mp4)}" poster="{esc(jpg)}" width="{w}" height="{h}" '
                      f'muted loop playsinline preload="none" aria-label="{esc(alt)}"></video>')
         else:
+            extra = ""
             media = (f'<img src="{esc(rel)}" alt="{esc(alt)}" width="{w}" height="{h}" '
                      f'loading="lazy" decoding="async">')
         tiles.append(
             f'<li><button type="button" class="tile" data-src="{esc(rel)}" '
-            f'data-caption="{esc(cap)}">{media}{overlay}</button></li>'
+            f'data-caption="{esc(cap)}"{extra}>{media}{overlay}</button></li>'
         )
 
     menu = []
@@ -281,7 +290,8 @@ TEMPLATE = """<!doctype html>
   }}
   .lightbox.open {{ display: flex; }}
   .lightbox figure {{ margin: 0; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; }}
-  .lightbox img {{ max-width: 100%; max-height: calc(100vh - 160px); object-fit: contain; border-radius: 6px; }}
+  .lightbox img, .lightbox video {{ max-width: 100%; max-height: calc(100vh - 160px); object-fit: contain; border-radius: 6px; }}
+  .lb-orig {{ font-size: 0.85em; margin-top: 0.4em; }}
   .lightbox figcaption {{ margin-top: 0.75em; max-width: 60em; text-align: center; font-size: 0.95em; }}
   .lb-close {{
     position: absolute; top: 8px; right: 12px; background: none; border: 0; color: #f0f0f0;
@@ -321,7 +331,9 @@ TEMPLATE = """<!doctype html>
   <button type="button" class="lb-close" id="lb-close" aria-label="Close">&times;</button>
   <figure>
     <img id="lb-img" alt="">
+    <video id="lb-vid" muted loop playsinline autoplay hidden></video>
     <figcaption id="lb-cap"></figcaption>
+    <a id="lb-orig" class="lb-orig" hidden>Original GIF</a>
   </figure>
 </div>
 <script>
@@ -364,12 +376,22 @@ const SHUFFLE = true;
 
   // Lightbox (shows the original file, e.g. the full GIF)
   var lb = document.getElementById("lightbox"), img = document.getElementById("lb-img"),
-      cap = document.getElementById("lb-cap"), closeBtn = document.getElementById("lb-close"), last = null;
+      cap = document.getElementById("lb-cap"), vid = document.getElementById("lb-vid"),
+      orig = document.getElementById("lb-orig"), closeBtn = document.getElementById("lb-close"), last = null;
   function open(btn) {{
     last = btn;
     var c = btn.getAttribute("data-caption");
-    img.src = btn.getAttribute("data-src");
-    img.alt = c || "{default_alt}";
+    var v = btn.getAttribute("data-video");
+    if (v) {{
+      img.hidden = true; vid.hidden = false; vid.src = v;
+      vid.setAttribute("aria-label", c || "{default_alt}");
+      var p = vid.play(); if (p && p.catch) p.catch(function () {{}});
+      orig.href = btn.getAttribute("data-src"); orig.hidden = false;
+    }} else {{
+      vid.hidden = true; img.hidden = false; orig.hidden = true;
+      img.src = btn.getAttribute("data-src");
+      img.alt = c || "{default_alt}";
+    }}
     cap.textContent = c;
     cap.hidden = !c;
     lb.hidden = false; lb.classList.add("open"); document.body.classList.add("no-scroll");
@@ -377,21 +399,24 @@ const SHUFFLE = true;
   }}
   function close() {{
     lb.classList.remove("open"); lb.hidden = true; document.body.classList.remove("no-scroll");
-    img.removeAttribute("src");
+    img.removeAttribute("src"); vid.pause(); vid.removeAttribute("src"); vid.load();
     if (last) last.focus();
   }}
   grid.addEventListener("click", function (e) {{
     var btn = e.target.closest(".tile"); if (btn) open(btn);
   }});
   closeBtn.addEventListener("click", close);
-  lb.addEventListener("click", function (e) {{ if (e.target !== img && e.target !== cap) close(); }});
+  lb.addEventListener("click", function (e) {{ if (e.target !== img && e.target !== vid && e.target !== cap && e.target !== orig) close(); }});
   document.addEventListener("keydown", function (e) {{
     if (e.key === "Escape" && nav.classList.contains("open") && lb.hidden) {{
       toggle.click(); toggle.focus(); return;
     }}
     if (lb.hidden) return;
     if (e.key === "Escape") close();
-    else if (e.key === "Tab") {{ e.preventDefault(); closeBtn.focus(); }}
+    else if (e.key === "Tab") {{
+      e.preventDefault();
+      if (!orig.hidden && document.activeElement === closeBtn) orig.focus(); else closeBtn.focus();
+    }}
   }});
 }})();
 </script>

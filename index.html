@@ -77,7 +77,8 @@
   }
   .lightbox.open { display: flex; }
   .lightbox figure { margin: 0; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; }
-  .lightbox img { max-width: 100%; max-height: calc(100vh - 160px); object-fit: contain; border-radius: 6px; }
+  .lightbox img, .lightbox video { max-width: 100%; max-height: calc(100vh - 160px); object-fit: contain; border-radius: 6px; }
+  .lb-orig { font-size: 0.85em; margin-top: 0.4em; }
   .lightbox figcaption { margin-top: 0.75em; max-width: 60em; text-align: center; font-size: 0.95em; }
   .lb-close {
     position: absolute; top: 8px; right: 12px; background: none; border: 0; color: #f0f0f0;
@@ -117,16 +118,16 @@
     <ul class="grid" id="grid">
       <li><button type="button" class="tile" data-src="images/arl13b-head.png" data-caption="Live image of developing prosencephalon of an E8.5 mouse embryo labelled with Arl13bCerulean-Fucci2a. (Mill/Ford)."><img src="images/arl13b-head.png" alt="Live image of developing prosencephalon of an E8.5 mouse embryo labelled with Arl13bCerulean-Fucci2a. (Mill/Ford)." width="512" height="512" loading="lazy" decoding="async"><span class="cap">Live image of developing prosencephalon of an E8.5 mouse embryo labelled with Arl13bCerulean-Fucci2a. (Mill/Ford).</span></button></li>
       <li><button type="button" class="tile" data-src="images/ckitl-timertag.png" data-caption="Live image of cKit-sfGFP/mCherry ‘timer tag’ labelled NIH 3T3 cells. (Olivia Harrison)"><img src="images/ckitl-timertag.png" alt="Live image of cKit-sfGFP/mCherry ‘timer tag’ labelled NIH 3T3 cells. (Olivia Harrison)" width="512" height="512" loading="lazy" decoding="async"><span class="cap">Live image of cKit-sfGFP/mCherry ‘timer tag’ labelled NIH 3T3 cells. (Olivia Harrison)</span></button></li>
-      <li><button type="button" class="tile" data-src="images/fucci-tail-skin.gif" data-caption="Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)"><video data-src="video/fucci-tail-skin.mp4" poster="video/fucci-tail-skin.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)"></video><span class="cap">Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)</span></button></li>
+      <li><button type="button" class="tile" data-src="images/fucci-tail-skin.gif" data-caption="Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)" data-video="video/fucci-tail-skin.mp4"><video data-src="video/fucci-tail-skin.mp4" poster="video/fucci-tail-skin.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)"></video><span class="cap">Fucci(SA) labelled melanocytes in postnatal tail skin culture. (Richard Mort)</span></button></li>
       <li><button type="button" class="tile" data-src="images/h2bfucci.png" data-caption="Live imaging of H2BCerulean-Fucci2a labelled NIH 3T3 nuclei. (Stephanie Wright)"><img src="images/h2bfucci.png" alt="Live imaging of H2BCerulean-Fucci2a labelled NIH 3T3 nuclei. (Stephanie Wright)" width="512" height="512" loading="lazy" decoding="async"><span class="cap">Live imaging of H2BCerulean-Fucci2a labelled NIH 3T3 nuclei. (Stephanie Wright)</span></button></li>
       <li><button type="button" class="tile" data-src="images/hair-follicle-depth.jpg" data-caption="Depth coded stack of mouse melanoblasts as they begin to colonise a developing hair follicle at E14.5 (Richard Mort)"><img src="images/hair-follicle-depth.jpg" alt="Depth coded stack of mouse melanoblasts as they begin to colonise a developing hair follicle at E14.5 (Richard Mort)" width="512" height="517" loading="lazy" decoding="async"><span class="cap">Depth coded stack of mouse melanoblasts as they begin to colonise a developing hair follicle at E14.5 (Richard Mort)</span></button></li>
       <li><button type="button" class="tile" data-src="images/macrophages.png" data-caption="Melanocytes and macrophages in mouse tail skin (Emma Wilkinson)"><img src="images/macrophages.png" alt="Melanocytes and macrophages in mouse tail skin (Emma Wilkinson)" width="512" height="512" loading="lazy" decoding="async"><span class="cap">Melanocytes and macrophages in mouse tail skin (Emma Wilkinson)</span></button></li>
       <li><button type="button" class="tile" data-src="images/macrophages-2.png" data-caption=""><img src="images/macrophages-2.png" alt="Fluorescence microscopy image from the Mort Lab" width="512" height="512" loading="lazy" decoding="async"></button></li>
-      <li><button type="button" class="tile" data-src="images/melanin-fucci.gif" data-caption="MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)"><video data-src="video/melanin-fucci.mp4" poster="video/melanin-fucci.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)"></video><span class="cap">MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)</span></button></li>
-      <li><button type="button" class="tile" data-src="images/melanoblasts.gif" data-caption="EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)"><video data-src="video/melanoblasts.mp4" poster="video/melanoblasts.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)"></video><span class="cap">EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)</span></button></li>
-      <li><button type="button" class="tile" data-src="images/mtmg-tail.gif" data-caption="Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)"><video data-src="video/mtmg-tail.mp4" poster="video/mtmg-tail.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)"></video><span class="cap">Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)</span></button></li>
+      <li><button type="button" class="tile" data-src="images/melanin-fucci.gif" data-caption="MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)" data-video="video/melanin-fucci.mp4"><video data-src="video/melanin-fucci.mp4" poster="video/melanin-fucci.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)"></video><span class="cap">MelanA cell labelled with Fucci(CA). Melanin has been pseudo-coloured as cyan. (Leah Pomfret)</span></button></li>
+      <li><button type="button" class="tile" data-src="images/melanoblasts.gif" data-caption="EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)" data-video="video/melanoblasts.mp4"><video data-src="video/melanoblasts.mp4" poster="video/melanoblasts.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)"></video><span class="cap">EYFP labelled melanoblasts migrating and proliferating in mouse embryonic skin culture. (Richard Mort)</span></button></li>
+      <li><button type="button" class="tile" data-src="images/mtmg-tail.gif" data-caption="Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)" data-video="video/mtmg-tail.mp4"><video data-src="video/mtmg-tail.mp4" poster="video/mtmg-tail.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)"></video><span class="cap">Mouse melanocytes (green) in adult tail skin culture. Keratinocytes have been labelled in red. (Richard Mort)</span></button></li>
       <li><button type="button" class="tile" data-src="images/pmel.png" data-caption="Live image of EYFP/H2BCerulean labelled melanoblasts migrating on the dorsal lateral pathway. (Richard Mort)"><img src="images/pmel.png" alt="Live image of EYFP/H2BCerulean labelled melanoblasts migrating on the dorsal lateral pathway. (Richard Mort)" width="512" height="512" loading="lazy" decoding="async"><span class="cap">Live image of EYFP/H2BCerulean labelled melanoblasts migrating on the dorsal lateral pathway. (Richard Mort)</span></button></li>
-      <li><button type="button" class="tile" data-src="images/qucci.gif" data-caption="Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)"><video data-src="video/qucci.mp4" poster="video/qucci.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)"></video><span class="cap">Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)</span></button></li>
+      <li><button type="button" class="tile" data-src="images/qucci.gif" data-caption="Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)" data-video="video/qucci.mp4"><video data-src="video/qucci.mp4" poster="video/qucci.jpg" width="512" height="512" muted loop playsinline preload="none" aria-label="Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)"></video><span class="cap">Qucci labelled NIH3T3 cells. Red = G1; Green = S; Yellow – S/G2/M; White = G0. (Tiernan Briggs)</span></button></li>
     </ul>
   </div>
 </main>
@@ -137,7 +138,9 @@
   <button type="button" class="lb-close" id="lb-close" aria-label="Close">&times;</button>
   <figure>
     <img id="lb-img" alt="">
+    <video id="lb-vid" muted loop playsinline autoplay hidden></video>
     <figcaption id="lb-cap"></figcaption>
+    <a id="lb-orig" class="lb-orig" hidden>Original GIF</a>
   </figure>
 </div>
 <script>
@@ -180,12 +183,22 @@ const SHUFFLE = true;
 
   // Lightbox (shows the original file, e.g. the full GIF)
   var lb = document.getElementById("lightbox"), img = document.getElementById("lb-img"),
-      cap = document.getElementById("lb-cap"), closeBtn = document.getElementById("lb-close"), last = null;
+      cap = document.getElementById("lb-cap"), vid = document.getElementById("lb-vid"),
+      orig = document.getElementById("lb-orig"), closeBtn = document.getElementById("lb-close"), last = null;
   function open(btn) {
     last = btn;
     var c = btn.getAttribute("data-caption");
-    img.src = btn.getAttribute("data-src");
-    img.alt = c || "Fluorescence microscopy image from the Mort Lab";
+    var v = btn.getAttribute("data-video");
+    if (v) {
+      img.hidden = true; vid.hidden = false; vid.src = v;
+      vid.setAttribute("aria-label", c || "Fluorescence microscopy image from the Mort Lab");
+      var p = vid.play(); if (p && p.catch) p.catch(function () {});
+      orig.href = btn.getAttribute("data-src"); orig.hidden = false;
+    } else {
+      vid.hidden = true; img.hidden = false; orig.hidden = true;
+      img.src = btn.getAttribute("data-src");
+      img.alt = c || "Fluorescence microscopy image from the Mort Lab";
+    }
     cap.textContent = c;
     cap.hidden = !c;
     lb.hidden = false; lb.classList.add("open"); document.body.classList.add("no-scroll");
@@ -193,21 +206,24 @@ const SHUFFLE = true;
   }
   function close() {
     lb.classList.remove("open"); lb.hidden = true; document.body.classList.remove("no-scroll");
-    img.removeAttribute("src");
+    img.removeAttribute("src"); vid.pause(); vid.removeAttribute("src"); vid.load();
     if (last) last.focus();
   }
   grid.addEventListener("click", function (e) {
     var btn = e.target.closest(".tile"); if (btn) open(btn);
   });
   closeBtn.addEventListener("click", close);
-  lb.addEventListener("click", function (e) { if (e.target !== img && e.target !== cap) close(); });
+  lb.addEventListener("click", function (e) { if (e.target !== img && e.target !== vid && e.target !== cap && e.target !== orig) close(); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && nav.classList.contains("open") && lb.hidden) {
       toggle.click(); toggle.focus(); return;
     }
     if (lb.hidden) return;
     if (e.key === "Escape") close();
-    else if (e.key === "Tab") { e.preventDefault(); closeBtn.focus(); }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      if (!orig.hidden && document.activeElement === closeBtn) orig.focus(); else closeBtn.focus();
+    }
   });
 })();
 </script>
