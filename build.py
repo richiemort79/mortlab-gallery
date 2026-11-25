@@ -252,11 +252,12 @@ TEMPLATE = """<!doctype html>
     html {{ font-size: 91.2%; }}
     .menu-toggle {{ display: block; }}
     .main-nav {{ display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
-                 background: #0d0d0d; border-bottom: 1px solid #d1d5db; }}
+                 background: #ffffff; }}
     .main-nav.open {{ display: block; }}
-    .main-nav ul {{ flex-direction: column; padding: 0 0 10px; }}
-    .main-nav a {{ line-height: 1.65; padding: 0.6em 20px; }}
-    .main-nav a:hover, .main-nav a.active {{ background: #1a1a1a; }}
+    .main-nav ul {{ flex-direction: column; padding: 0; }}
+    /* As on WordPress: white dropdown, cyan links, pale-blue hover/current row */
+    .main-nav a, .main-nav a.active {{ line-height: 3; padding: 0 20px; color: #4dd0e1; }}
+    .main-nav a:hover, .main-nav a.active {{ background: #f0f5fa; color: #4dd0e1; }}
   }}
 
   /* Content */
